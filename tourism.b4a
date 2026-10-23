@@ -1,0 +1,94 @@
+﻿Version=7.3
+NumberOfModules=6
+Module1=config
+Module2=frmmain
+Module3=menus
+Module4=HttpJob
+Module5=HttpUtils2Servis
+Module6=update
+Build1=Default,ir.farsroom.tourism
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="19"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~SetApplicationAttribute(android:theme, "@android:style/Theme.Holo.Light")~\n~~\n~RemovePermission(android.permission.BLUETOOTH)~\n~RemovePermission(android.permission.BLUETOOTH_ADMIN)~\n~RemovePermission(android.permission.BLUETOOTH_PRIVILEGED)~\n~~\n~AddPermission(android.permission.ACCESS_NETWORK_STATE)~\n~AddPermission(android.permission.READ_PHONE_STATE)~\n~AddPermission(android.permission.WAKE_LOCK)~\n~
+IconFile=
+NumberOfFiles=20
+File1=bg.xml
+File2=click.ogg
+File3=font.ttf
+File4=frmmain.bal
+File5=img_menu1.xml
+File6=img_menu2.xml
+File7=img_menu3.xml
+File8=img_menu4.xml
+File9=img_menu5.xml
+File10=img_menu6.xml
+File11=img_menu7.xml
+File12=img_menu8.xml
+File13=lefts.png
+File14=menu.xml
+File15=menu2.xml
+File16=menus.bal
+File17=rights.png
+File18=splash.bal
+File19=title.xml
+File20=tops.xml
+NumberOfLibraries=6
+Library1=core
+Library2=okhttp
+Library3=stringutils
+Library4=phone
+Library5=reflection
+Library6=json
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: توکا توریست
+	#VersionCode: 6
+	#VersionName: 6
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: portrait
+	#CanInstallToExternalStorage: False
+#End Region
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: False
+#End Region
+Sub Process_Globals
+	Private timers As Timer
+End Sub
+Sub Globals
+	Type TwoLines(a1 As String,a2 As String,a3 As String,a4 As String,a5 As String,a6 As String,a7 As String,a8 As String,a9 As String,a10 As String,a11 As String,a12 As String,a13 As String,a14 As String,a15 As String,a16 As String)
+	Private i As Int=31
+	Private img As ImageView
+End Sub
+Sub Activity_Create(FirstTime As Boolean)
+	config.Initialize
+'	StartActivity("frmmain")
+'	Activity.Finish
+'	Return
+	Activity.LoadLayout("splash")
+	Activity.Color=Colors.RGB(70,82,158)
+	
+	img.Width=80%x
+	img.Height=img.Width
+	img.Left=(100%x/2)-(img.Width/2)
+	img.Top=(100%y/2)-(img.Height/2)
+	img.Bitmap=LoadBitmapSample(File.DirAssets,"load/30.xml",img.Width,img.Height)
+
+	timers.Initialize("timer",120)
+	timers.Enabled=True
+End Sub
+Sub Activity_Resume
+
+End Sub
+Sub Activity_Pause (UserClosed As Boolean)
+
+End Sub
+Sub timer_Tick
+	i=i-1
+	If i<1 Then
+		timers.Enabled=False
+		StartActivity("frmmain")
+		Activity.Finish
+	Else
+		DoEvents
+		img.Bitmap=LoadBitmapSample(File.DirAssets,"load/"&i&".xml",img.Width,img.Height)
+	End If
+End Sub
